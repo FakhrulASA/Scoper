@@ -3,16 +3,19 @@ package com.fakhrulasa.scoper
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.os.Environment
 import android.os.Parcelable
 import android.provider.MediaStore
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import java.io.File
 import java.util.ArrayList
 
-object Scoper: AppCompatActivity() {
-     fun getPickImageIntent(): Intent? {
+object Scoper:AppCompatActivity() {
+
+     fun getPickImageIntent(context: Context): Intent? {
         var chooserIntent: Intent? = null
 
         var intentList: MutableList<Intent> = ArrayList()
@@ -25,10 +28,10 @@ object Scoper: AppCompatActivity() {
         }
 
         val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, setImageUri())
+        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, setImageUri(context))
 
-        intentList = addIntentsToList(this, intentList, pickIntent)
-        intentList = addIntentsToList(this, intentList, takePhotoIntent)
+        intentList = addIntentsToList(context, intentList, pickIntent)
+        intentList = addIntentsToList(context, intentList, takePhotoIntent)
 
         if (intentList.size > 0) {
             chooserIntent = Intent.createChooser(
@@ -57,8 +60,8 @@ object Scoper: AppCompatActivity() {
         }
         return list
     }
-     fun setImageUri(): Uri {
-        val folder = File("${getExternalFilesDir(Environment.DIRECTORY_DCIM)}")
+     fun setImageUri(context: Context): Uri {
+        val folder = File("${context.getExternalFilesDir(Environment.DIRECTORY_DCIM)}")
         folder.mkdirs()
 
         val file = File(folder, "Image_Tmp.jpg")
@@ -67,7 +70,7 @@ object Scoper: AppCompatActivity() {
         file.createNewFile()
         var imageUri = FileProvider.getUriForFile(
             this,
-            BuildConfig.APPLICATION_ID + getString(R.string.file_provider_name),
+            BuildConfig.APPLICATION_ID + context.getString(R.string.file_provider_name),
             file
         )
         var imgPath = file.absolutePath
