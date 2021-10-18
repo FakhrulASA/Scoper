@@ -13,6 +13,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -24,7 +25,7 @@ import java.util.ArrayList
 private const val REQ_CAPTURE = 100
 private const val RES_IMAGE = 100
 
-class MainActivity : ParentActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(){
     private var queryImageUrl: String = ""
     private val tag = javaClass.simpleName
     private var imgPath: String = ""
@@ -38,7 +39,7 @@ class MainActivity : ParentActivity(R.layout.activity_main) {
     private lateinit var buttonAdd:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.activity_main)
         progressBar=findViewById(R.id.progressBar)
         textType=findViewById(R.id.fileType)
         textName=findViewById(R.id.fileType2)
@@ -53,7 +54,7 @@ class MainActivity : ParentActivity(R.layout.activity_main) {
 
 
     private fun chooseImage() {
-        intentDocument.launch(getPickImageIntent(this, listOf("image/*","application/pdf/*")))
+        intentDocument.launch(getPickImageIntent(listOf("image/*","application/pdf/*")))
     }
 
     private var intentDocument =
