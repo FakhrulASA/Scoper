@@ -1,4 +1,4 @@
-# Scoper - A scoped storage management library with zero permission required
+# Scoper - Access any file with zero permission required
 
 <h3>With this codebase you will able to access file from your mobile without requiring permission or READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE which is restricted in Android 11 and beyond for only File managing related applications.</h3>
 
