@@ -53,7 +53,7 @@ class MainActivity : ParentActivity(R.layout.activity_main) {
 
 
     private fun chooseImage() {
-        intentDocument.launch(getPickImageIntent(this))
+        intentDocument.launch(getPickImageIntent(this, listOf("image/*","application/pdf/*")))
     }
 
     private var intentDocument =

@@ -15,7 +15,7 @@ import java.util.ArrayList
 
 object Scoper:AppCompatActivity() {
 
-     fun getPickImageIntent(context: Context): Intent? {
+     fun getPickImageIntent(context: Context,listOfType:List<String>?): Intent? {
         var chooserIntent: Intent? = null
 
         var intentList: MutableList<Intent> = ArrayList()
@@ -23,8 +23,14 @@ object Scoper:AppCompatActivity() {
         val pickIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "*/*"
-            val mimetypes = arrayOf("image/*", "application/pdf/*")
-            putExtra(Intent.EXTRA_MIME_TYPES, mimetypes)
+            if(listOfType.isNullOrEmpty()){
+                val mimetypes = ("*/*")
+                putExtra(Intent.EXTRA_MIME_TYPES, mimetypes)
+            }else{
+                val mimetypes = listOfType.toTypedArray()
+                putExtra(Intent.EXTRA_MIME_TYPES, mimetypes)
+            }
+
         }
 
         val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
