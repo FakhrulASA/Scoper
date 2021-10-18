@@ -20,6 +20,9 @@ object Scoper:AppCompatActivity() {
 
         var intentList: MutableList<Intent> = ArrayList()
 
+         /**
+          * For filepicker, where you will able to pick files
+          */
         val pickIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "*/*"
