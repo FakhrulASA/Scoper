@@ -41,3 +41,20 @@ function openGallery() {
     intentDocument.launch(getPickImageIntent(listOf("image/*","application/pdf/*")))
 }
 ```
+#File operation's
+To get the cached file path,
+```
+file.path
+```
+To get the cached file absolute path,
+```
+file.absolutePath
+```
+To get the cached file Uri,
+```
+file.toURI()
+```
+To get the cached file size in KB,
+```
+file?.length()!! / 1024
+```
