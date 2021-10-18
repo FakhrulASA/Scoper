@@ -39,10 +39,21 @@ You can request specefic file type according to your preference,
 
 ```kotlin
 function openGallery() {
-    intentDocument.launch(getPickImageIntent(listOf("image/*","application/pdf/*")))
+    intentDocument.launch(
+                Scoper.getPickImageIntent(
+                    listOf(
+                        FileType.PDF,
+                        FileType.IMAGE
+                    )
+                )
+            )
 }
 ```
 #File operation's
+To get the cached file name,
+```kotlin
+file.name
+```
 To get the cached file path,
 ```kotlin
 file.path
