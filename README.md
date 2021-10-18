@@ -7,13 +7,13 @@ To start with,
 Copy or clone this repository  **1.0.0 release branch** into your project,
 Then just startActivityForResult or use ActivityResultContracts.StartActivityForResult()
 ##
-```
+```kotlin
 function openGallery() {
     intentDocument.launch(getPickImageIntent(null))
 }
 ```
 Then manage it according to your need,
-```
+```kotlin
     private var intentDocument =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
@@ -37,25 +37,25 @@ Then manage it according to your need,
 # Request specefic filetype
 You can request specefic file type according to your preference,
 
-```
+```kotlin
 function openGallery() {
     intentDocument.launch(getPickImageIntent(listOf("image/*","application/pdf/*")))
 }
 ```
 #File operation's
 To get the cached file path,
-```
+```kotlin
 file.path
 ```
 To get the cached file absolute path,
-```
+```kotlin
 file.absolutePath
 ```
 To get the cached file Uri,
-```
+```kotlin
 file.toURI()
 ```
 To get the cached file size in KB,
-```
+```kotlin
 file?.length()!! / 1024
 ```
