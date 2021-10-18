@@ -8,7 +8,7 @@ Then just startActivityForResult or use ActivityResultContracts.StartActivityFor
 ##
 ```
 function openGallery() {
-  intentDocument.launch(getPickImageIntent(this))
+    intentDocument.launch(getPickImageIntent(this,null))
 }
 ```
 Then manage it according to your need,
@@ -32,4 +32,12 @@ Then manage it according to your need,
 
             }
         }
+```
+# Request specefic filetype
+You can request specefic file type according to your preference,
+
+```
+function openGallery() {
+    intentDocument.launch(getPickImageIntent(this, listOf("image/*","application/pdf/*")))
+}
 ```
