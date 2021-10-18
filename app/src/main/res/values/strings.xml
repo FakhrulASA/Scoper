@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Scoper</string>
+    <string name="file_provider_name" translatable="false">.fileProvider</string>
+</resources>
