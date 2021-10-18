@@ -3,49 +3,26 @@ package com.fakhrulasa.scoper
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
+import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.os.Parcelable
-import android.provider.MediaStore
+import android.os.StrictMode
+import android.os.StrictMode.VmPolicy
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.fakhrulasa.scoper.Scoper.getPickImageIntent
-import kotlinx.coroutines.*
 import java.io.File
-import java.util.ArrayList
-import android.os.StrictMode
-import android.os.StrictMode.VmPolicy
-import androidx.core.net.toUri
-import android.content.ActivityNotFoundException
 
 
-
-
-
-private const val REQ_CAPTURE = 100
-private const val RES_IMAGE = 100
-
-class MainActivity : AppCompatActivity(){
-    private var queryImageUrl: String = ""
-    private val tag = javaClass.simpleName
-    private var imgPath: String = ""
-    private var imageUri: Uri? = null
-    private val permissions = arrayOf(Manifest.permission.CAMERA)
-
-    private lateinit var progressBar:ProgressBar
-    private lateinit var textName:TextView
-    private lateinit var textType:TextView
-    private lateinit var imageView:ImageView
-    private lateinit var buttonAdd:Button
+class MainActivity : AppCompatActivity() {
+    private lateinit var progressBar: ProgressBar
+    private lateinit var textName: TextView
+    private lateinit var textType: TextView
+    private lateinit var imageView: ImageView
+    private lateinit var buttonAdd: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -66,7 +43,7 @@ class MainActivity : AppCompatActivity(){
 
 
     private fun chooseImage() {
-        intentDocument.launch(getPickImageIntent(listOf("image/*","application/pdf/*")))
+        intentDocument.launch(getPickImageIntent(listOf("image/*", "application/pdf/*")))
     }
 
     @SuppressLint("WrongConstant")
@@ -121,4 +98,5 @@ class MainActivity : AppCompatActivity(){
                 }
             }
 
-        }}
+        }
+}
