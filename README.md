@@ -9,7 +9,7 @@ Then just startActivityForResult or use ActivityResultContracts.StartActivityFor
 ##
 ```kotlin
 function openGallery() {
-    intentDocument.launch(getPickImageIntent(null))
+    intentDocument.launch(openFileIntent(null))
 }
 ```
 Then manage it according to your need,
@@ -38,16 +38,16 @@ Then manage it according to your need,
 You can request specefic file type according to your preference,
 
 ```kotlin
-function openGallery() {
-    intentDocument.launch(
-                Scoper.getPickImageIntent(
-                    listOf(
-                        FileType.PDF,
-                        FileType.IMAGE
-                    )
+    private fun chooseImage() {
+        intentDocument.launch(
+            openFileIntent(
+                listOf(
+                    FileType.PDF,
+                    FileType.IMAGE
                 )
             )
-}
+        )
+    }
 ```
 #File operation's
 To get the cached file name,
