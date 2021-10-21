@@ -1,16 +1,51 @@
 # Scoper - Access any file with zero permission required
 ![Fakhruls's GitHub stats](https://img.shields.io/static/v1?label=&message=Android11&color=green)![Fakhruls's GitHub stats](https://img.shields.io/static/v1?label=&message=READY&color=orange)
 
-<h3>With this codebase you will able to access file from your mobile without requiring permission or READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE which is restricted in Android 11 and beyond for only File managing related applications.</h3>
+<h3>With this library you will able to access file from your mobile without requiring any permissions including READ_EXTERNAL_STORAGE or WRITE_EXTERNAL_STORAGE which are restricted in Android 11 and beyond for only File managing related applications.</h3>
 
 To start with, 
 Copy or clone this repository  **1.0.0 release branch** into your project,
-Then just startActivityForResult or use ActivityResultContracts.StartActivityForResult()
+Then just call openFileIntent() for accessing documents and manage your documents, files in startActivityForResult or use ActivityResultContracts.StartActivityForResult()
 ##
 ```kotlin
 function openGallery() {
     intentDocument.launch(openFileIntent(null))
 }
+```
+To store the file into your app cache and use it later anywhere,
+```
+var file:File? =  FileUtil.from(this,result.data?.data!!)
+```
+Then manage it according to your need,
+```kotlin
+    private var intentDocument =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+
+                var file:File? =  FileUtil.from(this,result.data?.data!!)
+	
+                    if (result.resultCode == Activity.RESULT_OK) {
+                       /**
+                       * Your code here for managing the file
+                       */
+                }
+            }
+        }
+```
+# Request specefic filetype
+You can request specefic file type according to your preference,
+
+```kotlin
+    private fun getDocument() {
+        intentDocument.launch(
+            openFileIntent(
+                listOf(
+                    FileType.PDF,
+                    FileType.IMAGE
+                )
+            )
+        )
+    }
 ```
 Then manage it according to your need,
 ```kotlin
@@ -33,21 +68,6 @@ Then manage it according to your need,
 
             }
         }
-```
-# Request specefic filetype
-You can request specefic file type according to your preference,
-
-```kotlin
-    private fun chooseImage() {
-        intentDocument.launch(
-            openFileIntent(
-                listOf(
-                    FileType.PDF,
-                    FileType.IMAGE
-                )
-            )
-        )
-    }
 ```
 #File operation's
 To get the cached file name,
