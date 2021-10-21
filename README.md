@@ -22,7 +22,7 @@ Then manage it according to your need,
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
 
-Scoper                var file:File? =  FileUtil.from(this,result.data?.data!!)
+                var file:File? =  FileUtil.from(this,result.data?.data!!)
 	
                     if (result.resultCode == Activity.RESULT_OK) {
                        /**
@@ -69,7 +69,33 @@ Then manage it according to your need,
             }
         }
 ```
-#File operation's
+# Add provider in Application scope of your manifest and provider_paths to res/xml in order work under your application scope.
+```kotlin
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+```
+and create an XML file into your res/xml named provider_paths
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-cache-path
+        name="external_cache_files"
+        path="." />
+    <external-files-path
+        name="external_files_files"
+        path="." />
+    <external-path
+        name="external_files"
+        path="." />
+</paths>
+```
+# File operation's
 To get the cached file name,
 ```kotlin
 file.name
