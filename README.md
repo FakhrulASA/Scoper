@@ -95,7 +95,7 @@ and create an XML file into your res/xml named provider_paths
         path="." />
 </paths>
 ```
-#File operation's
+# File operation's
 To get the cached file name,
 ```kotlin
 file.name
