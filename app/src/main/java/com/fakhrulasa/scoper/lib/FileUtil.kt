@@ -1,4 +1,4 @@
-package com.fakhrulasa.scoper
+package com.fakhrulasa.scoper.lib
 
 import android.content.Context
 import android.net.Uri
